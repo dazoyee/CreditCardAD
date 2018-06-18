@@ -16,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class MainController {
 
-
 	@Autowired
 	private JdbcTemplate jdbc;
 
@@ -29,16 +28,29 @@ public class MainController {
 	public String test_credit_select1(Model model) {
 	return "test_credit_select1";
 	}
+
+	@GetMapping("/test_credit_select2")
+	public String test_credit_select2(Model model) {
+	return "test_credit_select2";
+	}
 	
 	@GetMapping("/test_credit_result")
 	public String test_credit_result() {
 	return "test_credit_result";
 	}
+
+	@PostMapping("/test_credit_select2")
+	public String test_credit_select2(int service_id[], RedirectAttributes attr) {
+		jdbc.update("DELETE FROM creditcard_service_user WHERE creditcard_id = 99");
+		for (int i=0; i<service_id.length; i++) {
+			jdbc.update("INSERT INTO creditcard_service_user (creditcard_id,service_id) values(99,?);", service_id[i]);
+		}
+		return "redirect:/test_credit_select2";
+	}
 	
-//	int creditcard_id_max;
+//	String cn = card_name.get();
 	@PostMapping("/test_credit_result")
 	public String test_credit_result(int service_id[], RedirectAttributes attr) {
-		jdbc.update("DELETE FROM creditcard_service_user WHERE creditcard_id = 99");
 		for (int i=0; i<service_id.length; i++) {
 			jdbc.update("INSERT INTO creditcard_service_user (creditcard_id,service_id) values(99,?);", service_id[i]);
 		}
@@ -61,7 +73,10 @@ public class MainController {
 			System.out.println("nscore(1/平方根）:  "+nscore);
 			double score = Double.valueOf(csu_count.get("csu_count").toString())*nscore*nscore_user;
 			System.out.println("score:  "+score);
+			System.out.println();
 			System.out.println("-------------------------------------------------------------");
+			
+			jdbc.update("INSERT INTO creditcard_service_result (creditcard_id,score) values(,?);", score);
 
 			scoreList.add(score);			
 			}
@@ -76,27 +91,3 @@ public class MainController {
 	}
 }
 
-
-	/*
-	@GetMapping("/form")
-	public String sample(String name, int age, Model model) {
-
-	model.addAttribute("name", name);
-	model.addAttribute("age", age);
-	
-	//DB挿入
-	jdbc.update("insert into DBTest (name,age) values(?,?);", name,age);
-	
-//	model.addAttribute("name1",jdbc.queryForList("SELECT * FROM DBTest").get(1));
-//	model.addAttribute("name2",jdbc.queryForList("SELECT * FROM DBTest").get(1).get("name"));
-	model.addAttribute("DBTests",jdbc.queryForList("SELECT * FROM DBTest"));
-	
-	//DB更新
-//	jdbc.update("UPDATE DBTest SET name = ?,age = ?", name,age);
-//    Map<String, Object> DBTest = jdbc.queryForList("SELECT * FROM DBTest where name = ?", name).get(0);
-	
-	return "hello";
-	}
-	*/
-
-	

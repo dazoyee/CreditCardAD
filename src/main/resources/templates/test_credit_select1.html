@@ -7,13 +7,25 @@
 	</head>
 	<body>
 		<h1>欲しい付帯サービスを選んでください</h1>
-		<form method="post" th:action="@{/test_credit_result}">
+		<form method="post" th:action="@{/test_credit_select2}">
     	<p>
-      	<input type="checkbox" name="service_id" value="1">入会キャンペーン実施中<br>
+      	<input type="checkbox" name="service_id" value="1">入会キャンペーンが実施されているカードがいい<br>
 				<input type="checkbox" name="service_id" value="2">ポイント還元率が高い<br>
-				<input type="checkbox" name="service_id" value="3">ネットショッピングでお得(Amazon.co.jp)<br>
-				<input type="checkbox" name="service_id" value="4">ネットショッピングでお得(Yahoo!ショッピング)<br>
-				<input type="checkbox" name="service_id" value="5">ネットショッピングでお得(楽天市場)<br>
+				<input type="checkbox" name="service_id" value="3">「Amazon.co.jp」でのネットショッピングをお得にしたい<br>
+				<input type="checkbox" name="service_id" value="4">「Yahoo!ショッピング」でのネットショッピングをお得にしたい<br>
+				<input type="checkbox" name="service_id" value="5">「楽天市場」でのネットショッピングをお得にしたい<br>
+      	<input type="checkbox" name="service_id" value="6">街なかのショッピングでお得にしたい<br>
+				<input type="checkbox" name="service_id" value="7">コンビニ（セブンイレブン）でお得にしたい<br>
+				<input type="checkbox" name="service_id" value="8">コンビニ（ローソン）でお得にしたい<br>
+				<input type="checkbox" name="service_id" value="9">コンビニ（ファミリーマート）でお得にしたい<br>
+				<input type="checkbox" name="service_id" value="10">スーパーでお得にしたい<br>
+				<input type="checkbox" name="service_id" value="11">携帯電話でお得にしたい<br>
+				<input type="checkbox" name="service_id" value="12">電車でお得にしたい/電車で便利に過ごしたい<br>
+				<input type="checkbox" name="service_id" value="13">ガソリンスタンドでお得にしたい<br>
+				<input type="checkbox" name="service_id" value="14">空港ラウンジを利用できるようにしたい<br>
+				<input type="checkbox" name="service_id" value="15">ANAマイルをお得に貯めたい<br>
+				<input type="checkbox" name="service_id" value="16">JALマイルをお得に貯めたい<br>
+				<input type="checkbox" name="service_id" value="17">なによりも即日発行したい<br>				
 				<br>
     		<input type= "submit" value=次へ進む>
     	</p>
