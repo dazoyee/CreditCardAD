@@ -1,0 +1,14 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<title>結果表示</title>
+	</head>
+	<body>
+		<h1>あなたにおすすめのクレジットカードはこちら!</h1>
+		<div th:each = "score:${scores}">
+			マッチ度:<span th:text="${score}"></span>
+		 </div>
+	</body>
+</html>
