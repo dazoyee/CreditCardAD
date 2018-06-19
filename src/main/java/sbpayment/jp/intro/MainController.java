@@ -90,7 +90,7 @@ public class MainController {
 //			System.out.println();
 			System.out.println("-------------------------------------------------------------");
 			
-			jdbc.update("INSERT INTO creditcard_service_result (score) VALUES(?);", score);
+			jdbc.update("INSERT INTO creditcard_service_result (score) VALUES(?);", String.format("%.3f", score));
 //			 ON DUPLICATE KEY UPDATE score = VALUES(?)
 //			jdbc.update("UPDATE creditcard_service_result SET score = ? IF @@ROWCOUNT = 0 INSERT INTO creditcard_service_result (score) VALUES(?);", score);
 			
