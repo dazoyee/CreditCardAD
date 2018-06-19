@@ -45,20 +45,6 @@ FROM
 GROUP BY creditcard_id, service_id;
 
 
-
-/*
-SELECT
-	service_id,
-	creditcard_id,
-	SQRT(SUM(score) OVER(PARTITION BY creditcard_id)) AS norm,
-	score / SQRT(SUM(score) OVER(PARTITION BY creditcard_id)) AS nscore
-FROM
-	creditcard_service;
-
-
-
-*/
-
 WITH
 	norm_creditcard_service AS (
 		SELECT service_id, creditcard_id
@@ -96,4 +82,13 @@ UNION ALL
 SELECT * FROM creditcard_service_user;
 
 
+
+SELECT 
+	creditcard_id, name, score 
+FROM 
+	creditcard_service_result 
+	JOIN 
+		creditcard 
+		ON creditcard_service_result.creditcard_id = creditcard.id 
+	ORDER BY score DESC;
 

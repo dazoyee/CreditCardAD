@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<title>選択画面</title>
+	</head>
+	<body>
+		<h1>その他サービスについて</h1>
+		<form method="post" th:action="@{/test_credit_result}">
+    	<p>
+    		<h4>付帯保険サービス</h4>
+      		<input type="checkbox" name="service_id" value="31">海外旅行傷害保険<br>
+					<input type="checkbox" name="service_id" value="32">国内旅行傷害保険<br>
+					<input type="checkbox" name="service_id" value="33">ショッピング保険<br>
+					<input type="checkbox" name="service_id" value="34">航空便遅延保険<br>
+			</p>
+			<p>
+				<h4>カードの種類</h4>	
+					<input type="checkbox" name="service_id" value="41">プラチナカード<br>
+					<input type="checkbox" name="service_id" value="42">ゴールドカード<br>
+					<input type="checkbox" name="service_id" value="43">リボ払い専用カード<br>
+      </p>
+      <p>
+      	<h4>溜まって欲しいポイントがあれば</h4>
+      		<input type="checkbox" name="service_id" value="51">Tポイント<br>
+					<input type="checkbox" name="service_id" value="52">Pontaポイント<br>
+					<input type="checkbox" name="service_id" value="53">楽天スーパーポイント<br>
+			</p>
+			<p>
+				<h4>国際ブランド</h4>	
+					<input type="checkbox" name="service_id" value="61">VISA<br>
+					<input type="checkbox" name="service_id" value="62">Mastercard<br>
+					<input type="checkbox" name="service_id" value="63">JCB<br>
+					<input type="checkbox" name="service_id" value="64">American Express<br>
+					<input type="checkbox" name="service_id" value="65">Diners Club<br>				
+			</p>
+			<input type= "submit" value=次へ進む>	
+   	</form>	
+	</body>
+</html>

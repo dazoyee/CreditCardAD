@@ -7,8 +7,19 @@
 	</head>
 	<body>
 		<h1>あなたにおすすめのクレジットカードはこちら!</h1>
-		<div th:each = "score:${scores}">
-			マッチ度:<span th:text="${score}"></span>
+		<div th:each = "result:${result_table}">
+			カード名:<span th:text="${result.name}"></span>
+			マッチ度:<span th:text="${result.score}"></span>
 		 </div>
 	</body>
 </html>
+
+
+
+
+
+
+
+
+
+
