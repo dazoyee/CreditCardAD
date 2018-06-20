@@ -91,10 +91,8 @@ public class MainController {
 			System.out.println("-------------------------------------------------------------");
 			
 			jdbc.update("INSERT INTO creditcard_service_result (score) VALUES(?);", String.format("%.3f", score));
-//			 ON DUPLICATE KEY UPDATE score = VALUES(?)
-//			jdbc.update("UPDATE creditcard_service_result SET score = ? IF @@ROWCOUNT = 0 INSERT INTO creditcard_service_result (score) VALUES(?);", score);
-			
-			attr.addFlashAttribute("result_table", jdbc.queryForList("SELECT * FROM creditcard_service_result JOIN creditcard ON creditcard_service_result.creditcard_id = creditcard.id ORDER BY score DESC;"));
+
+			attr.addFlashAttribute("result_table", jdbc.queryForList("SELECT ROW_NUMBER() OVER() AS RANK, * FROM  (SELECT name, score FROM creditcard_service_result JOIN creditcard ON creditcard_service_result.creditcard_id = creditcard.id ORDER BY score DESC) WHERE ROW_NUMBER() OVER() BETWEEN 1 AND 10;;"));
 
 			
 //			scoreList.add(score);			

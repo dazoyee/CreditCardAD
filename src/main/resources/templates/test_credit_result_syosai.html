@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>結果表示</title>
+		<title>結果の詳細表示</title>
 	 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -17,16 +17,13 @@
 	<body>
 	
 		<div class="container">
-			<h1 class="page-header">あなたにおすすめのクレジットカードはこちら!</h1>
-			<table class="table">
-				<tr><th>ランキング</th><th>カード名</th><th>マッチング度</th></tr>
-				<form method="post" th:action="@{/test_credit_result_syosai}">
+			<h1 class="page-header">詳細</h1>
+				<form method="post" th:action="@{/test_credit_syosai}">
 					<div th:each = "result:${result_table}">
 						<tr><td th:text="${result.rank}"></td><td th:text="${result.name}"></td><td th:text="${result.score}"></td><td><button type="submit" class="btn btn-info btn-sg" value=${result.creditcard_id}>詳細</button></td></tr>
 				 		
 				 	</div>
 				</form>
-			</table>
 		</div>
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
