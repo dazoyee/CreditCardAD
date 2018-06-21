@@ -2,61 +2,143 @@
 <!DOCTYPE html>
 <html lang="ja">
 
-	<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>選択画面（３）</title>
-	 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <!--[if lt IE 9]>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>選択画面（３）</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet">
+<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
-  
-	<body>
-	
-		<div class="container">
-			<h2 class="page-header">その他サービスについて</h2>
-			<form method="post" th:action="@{/test_credit_result}">
-    		<div class="list-group form-group">
-    			<p>
-    				<h4 class="page-header">付帯保険サービス</h4>
-    					<div class="list-group-item checkbox"><label><input type="checkbox" name="service_id" value="31">海外旅行傷害保険</label></div>
-		      		<div class="list-group-item checkbox"><label><input type="checkbox" name="service_id" value="32">国内旅行傷害保険</label></div>
-		     	 		<div class="list-group-item checkbox"><label><input type="checkbox" name="service_id" value="33">ショッピング保険</label></div>
-		      		<div class="list-group-item checkbox"><label><input type="checkbox" name="service_id" value="34">航空便遅延保険</label></div>
-    			</p><p>
-						<h4 class="page-header">カードの種類</h4>	
-							<div class="list-group-item checkbox"><label><input type="checkbox" name="service_id" value="41">プラチナカード</label></div>
-		      		<div class="list-group-item checkbox"><label><input type="checkbox" name="service_id" value="42">ゴールドカード</label></div>
-		     	 		<div class="list-group-item checkbox"><label><input type="checkbox" name="service_id" value="43">リボ払い専用カード</label></div>
-      		</p><p>
-      			<h4 class="page-header">溜まって欲しいポイントがあれば</h4>
-      				<div class="list-group-item checkbox"><label><input type="checkbox" name="service_id" value="51">Tポイント</label></div>
-		      		<div class="list-group-item checkbox"><label><input type="checkbox" name="service_id" value="52">Pontaポイント</label></div>
-		     	 		<div class="list-group-item checkbox"><label><input type="checkbox" name="service_id" value="53">楽天スーパーポイント</label></div>
-					</p><p>
-						<h4 class="page-header">国際ブランド</h4>	
-							<div class="list-group-item checkbox"><label><input type="checkbox" name="service_id" value="61">VISA</label></div>
-		      		<div class="list-group-item checkbox"><label><input type="checkbox" name="service_id" value="62">Mastercard</label></div>
-		      		<div class="list-group-item checkbox"><label><input type="checkbox" name="service_id" value="63">JCB</label></div>
-		      		<div class="list-group-item checkbox"><label><input type="checkbox" name="service_id" value="64">American Express</label></div>
-		      		<div class="list-group-item checkbox"><label><input type="checkbox" name="service_id" value="65">Diners Club</label></div>		
-					</p>
-					<br>
-    			<button type="submit" class="btn btn-info btn-lg">結果へ進む</button>
-    		</div>	
-   		</form>
-   	</div>
-   	
-   	<ul class="pager">
-   		<li><button class="btn btn-default" onclick="location.href='./test_credit_select2'">戻る</button></li>
-   		<li><button class="btn btn-default" onclick="location.href='./test_credit_title'">ホーム</button></li>
-   	</ul> 	
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  	
-	</body>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="page header">
+			<br>
+			<div class="row" style="background: #90EE90">
+				<div class="text-center">
+					<h2>その他サービスについて</h2>
+				</div>
+				<br>
+			</div>
+			<br> <br>
+		</div>
+
+		<form method="post" th:action="@{/test_credit_result}">
+			<div class="list-group form-group">
+				<div class="page header">
+					<div class="row" style="background: #CBFFD3;">
+						<div class="text-center">
+							<h4>付帯保険サービス</h4>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="list-group-item checkbox">
+					<label><input type="checkbox" name="service_id" value="31">海外旅行傷害保険</label>
+				</div>
+				<div class="list-group-item checkbox">
+					<label><input type="checkbox" name="service_id" value="32">国内旅行傷害保険</label>
+				</div>
+				<div class="list-group-item checkbox">
+					<label><input type="checkbox" name="service_id" value="33">ショッピング保険</label>
+				</div>
+				<div class="list-group-item checkbox">
+					<label><input type="checkbox" name="service_id" value="34">航空便遅延保険</label>
+				</div>
+
+				<br><br>
+
+				<div class="page header">
+					<div class="row" style="background: #CBFFD3;">
+						<div class="text-center">
+							<h4>カードの種類</h4>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="list-group-item checkbox">
+					<label><input type="checkbox" name="service_id" value="41">プラチナカード</label>
+				</div>
+				<div class="list-group-item checkbox">
+					<label><input type="checkbox" name="service_id" value="42">ゴールドカード</label>
+				</div>
+				<div class="list-group-item checkbox">
+					<label><input type="checkbox" name="service_id" value="43">リボ払い専用カード</label>
+				</div>
+
+				<br><br>
+
+				<div class="page header">
+					<div class="row" style="background: #CBFFD3;">
+						<div class="text-center">
+							<h4>溜まって欲しいポイントがあれば</h4>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="list-group-item checkbox">
+					<label><input type="checkbox" name="service_id" value="51">Tポイント</label>
+				</div>
+				<div class="list-group-item checkbox">
+					<label><input type="checkbox" name="service_id" value="52">Pontaポイント</label>
+				</div>
+				<div class="list-group-item checkbox">
+					<label><input type="checkbox" name="service_id" value="53">楽天スーパーポイント</label>
+				</div>
+
+				<br><br>
+
+				<div class="page header">
+					<div class="row" style="background: #CBFFD3;">
+						<div class="text-center">
+							<h4>国際ブランド</h4>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="list-group-item checkbox">
+					<label><input type="checkbox" name="service_id" value="61">VISA</label>
+				</div>
+				<div class="list-group-item checkbox">
+					<label><input type="checkbox" name="service_id" value="62">Mastercard</label>
+				</div>
+				<div class="list-group-item checkbox">
+					<label><input type="checkbox" name="service_id" value="63">JCB</label>
+				</div>
+				<div class="list-group-item checkbox">
+					<label><input type="checkbox" name="service_id" value="64">American
+						Express</label>
+				</div>
+				<div class="list-group-item checkbox">
+					<label><input type="checkbox" name="service_id" value="65">Diners
+						Club</label>
+				</div>
+
+
+				<br><br>
+				<button type="submit" class="btn btn-info btn-lg center-block">結果へ進む</button>
+			</div>
+		</form>
+	</div>
+
+	<ul class="pager">
+		<li><button class="btn btn-default"
+				onclick="location.href='./test_credit_select2'">戻る</button></li>
+		<li><button class="btn btn-default"
+				onclick="location.href='./test_credit_title'">ホーム</button></li>
+	</ul>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
 </html>
