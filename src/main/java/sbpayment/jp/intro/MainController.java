@@ -20,21 +20,33 @@ public class MainController {
 
 	@GetMapping("/test_credit_title")
 	public String test_credit_title() {
+		jdbc.update("DELETE FROM creditcard_service_user WHERE creditcard_id = 99");
+		jdbc.update("DELETE FROM creditcard_service_result");
+//		jdbc.update("ALTER TABLE creditcard_service_result DROP COLUMN score");
 		return "test_credit_title";
 	}
 
 	@GetMapping("/test_credit_select1")
 	public String test_credit_select1(Model model) {
+		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id = 0");
+		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id BETWEEN 1 AND 17");
 		return "test_credit_select1";
 	}
 
 	@GetMapping("/test_credit_select2")
 	public String test_credit_select2(Model model) {
+		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id = 0");
+		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id BETWEEN 21 AND 27");
 		return "test_credit_select2";
 	}
 
 	@GetMapping("/test_credit_select3")
 	public String test_credit_select3(Model model) {
+		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id = 0");
+		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id BETWEEN 31 AND 34");
+		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id BETWEEN 41 AND 43");
+		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id BETWEEN 51 AND 53");
+		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id BETWEEN 61 AND 65");
 		return "test_credit_select3";
 	}
 
@@ -55,6 +67,7 @@ public class MainController {
 		}
 		return "test_credit_result_syosai";
 	}
+
 
 	@PostMapping("/test_credit_select2")
 	public String test_credit_select2(int service_id[], RedirectAttributes attr) {
@@ -81,11 +94,11 @@ public class MainController {
 		}
 		Map<String, Object> sum_user = jdbc
 				.queryForList(
-						"SELECT COUNT(service_id) AS sum_user FROM creditcard_service_user GROUP BY creditcard_id")
+						"SELECT COUNT(service_id) AS sum_user FROM creditcard_service_user WHERE service_id != 0 GROUP BY creditcard_id")
 				.get(0);
 		double nscore_user = 1 / Math.sqrt(Double.valueOf(sum_user.get("sum_user").toString()));
 		System.out.println();
-		System.out.println("nscore_user:  " + nscore_user);
+		System.out.println("nscore_user(1/平方根）:  " + nscore_user);
 		System.out.println("-------------------------------------------------------------");
 
 		// jdbc.update("ALTER TABLE creditcard_service_result DROP COLUMN score");
@@ -109,51 +122,26 @@ public class MainController {
 			// System.out.println();
 			System.out.println("-------------------------------------------------------------");
 
-			jdbc.update("INSERT INTO creditcard_service_result (score) VALUES(?);", String.format("%.3f", score));
+//			jdbc.update("INSERT INTO creditcard_service_result (score) VALUES(?) ON CONFLICT ON CONSTRAINT csr_pkey DO UPDATE SET score = ?", String.format("%.3f", score));
+			jdbc.update("INSERT INTO creditcard_service_result (creditcard_id, score) VALUES(?,?);",i ,String.format("%.3f", score));
+//			jdbc.update("UPDATE creditcard_service_result SET score = ?;", String.format("%.3f", score));
+//			jdbc.update("UPDATE creditcard_service_result SET creditcard_id = (SELECT id FROM creditcard");
 
 			List<Map<String, Object>> result = jdbc.queryForList(
 					"SELECT ROW_NUMBER() OVER() AS RANK, * FROM  (SELECT name, score FROM creditcard_service_result JOIN creditcard ON creditcard_service_result.creditcard_id = creditcard.id ORDER BY score DESC) WHERE ROW_NUMBER() OVER() BETWEEN 1 AND 10;");
 			for (int j = 0; j < result.size(); j++) {
 				result.get(j).put("link", "test_credit_result_syosai/" + result.get(j).get("name"));
-				System.out.println(result.get(j).get("link"));
 			}
 			System.out.println(result);
 			attr.addFlashAttribute("result_table", result);
 
 			// scoreList.add(score);
 		}
-
 		// Collections.sort(scoreList, Collections.reverseOrder());
 		// attr.addFlashAttribute("scores",scoreList);
 
 		return "redirect:/test_credit_result";
 	}
 
-	// @PostMapping("/test_credit_result_syosai/{name}")
-	// public String test_credit_result_syosai(@PathVariable("name") String name,
-	// RedirectAttributes attr) {
-	// attr.addFlashAttribute("creditcard_name",jdbc.queryForList("SELECT * FROM
-	// creditcard WHERE name = ?",name).get(0).get("name"));
-	//
-	// return "redirect:/test_credit_result_syosai";
-	// }
 
-	/*
-	 * @GetMapping("/detail/{id}") public String detail(@PathVariable("id") String
-	 * id,RedirectAttributes attr) { attr.addFlashAttribute("id",jdbc.
-	 * queryForList("SELECT * FROM service WHERE id = ?",id).get(0).get("id"));
-	 * attr.addFlashAttribute("mailaddress",jdbc.
-	 * queryForList("SELECT mailaddress FROM service WHERE id = ?",id).get(0).get(
-	 * "mailaddress")); attr.addFlashAttribute("card_bra",jdbc.
-	 * queryForList("SELECT card_bra FROM service WHERE id = ?",id).get(0).get(
-	 * "card_bra")); attr.addFlashAttribute("card_num",jdbc.
-	 * queryForList("SELECT card_num FROM service WHERE id = ?",id).get(0).get(
-	 * "card_num")); attr.addFlashAttribute("s_id",jdbc.
-	 * queryForList("SELECT s_id FROM service WHERE id = ?",id).get(0).get("s_id"));
-	 * attr.addFlashAttribute("password",jdbc.
-	 * queryForList("SELECT password FROM service WHERE id = ?",id).get(0).get(
-	 * "password")); attr.addFlashAttribute("other",jdbc.
-	 * queryForList("SELECT other FROM service WHERE id = ?",id).get(0).get("other")
-	 * ); return "redirect:/detail"; }
-	 */
 }

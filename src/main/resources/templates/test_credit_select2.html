@@ -58,16 +58,18 @@
 					<label><input type="checkbox" name="service_id" value="27">条件付無料</label>
 				</div>
 				</p>
+				
+				<font color="#808080">※いずれかの項目を選択してください。</font>
 				<br>
 				<br>
-				<button type="submit" class="btn btn-info">次へ進む</button>
+				<button type="submit" class="btn btn-info" name="service_id" value="0">次へ進む</button>
 			</div>
 		</form>
 	</div>
 
 	<ul class="pager">
 		<li><button class="btn btn-default"
-				onclick="location.href='./test_credit_select1'">戻る</button></li>
+				onclick="history.back()">戻る</button></li>
 		<li><button class="btn btn-default"
 				onclick="location.href='./test_credit_title'">ホーム</button></li>
 	</ul>
