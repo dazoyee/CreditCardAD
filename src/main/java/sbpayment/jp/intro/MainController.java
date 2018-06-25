@@ -28,21 +28,18 @@ public class MainController {
 
 	@GetMapping("/test_credit_select1")
 	public String test_credit_select1(Model model) {
-		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id = 0");
 		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id BETWEEN 1 AND 17");
 		return "test_credit_select1";
 	}
 
 	@GetMapping("/test_credit_select2")
 	public String test_credit_select2(Model model) {
-		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id = 0");
 		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id BETWEEN 21 AND 27");
 		return "test_credit_select2";
 	}
 
 	@GetMapping("/test_credit_select3")
 	public String test_credit_select3(Model model) {
-		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id = 0");
 		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id BETWEEN 31 AND 34");
 		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id BETWEEN 41 AND 43");
 		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id BETWEEN 51 AND 53");
@@ -117,13 +114,13 @@ public class MainController {
 			System.out.println("norm(平方根):  " + norm);
 			double nscore = 1 / norm;
 			System.out.println("nscore(1/平方根）:  " + nscore);
-			double score = Double.valueOf(csu_count.get("csu_count").toString()) * nscore * nscore_user;
+			double score = Double.valueOf(csu_count.get("csu_count").toString()) * nscore * nscore_user*100;
 			System.out.println("score:  " + score);
 			// System.out.println();
 			System.out.println("-------------------------------------------------------------");
 
 //			jdbc.update("INSERT INTO creditcard_service_result (score) VALUES(?) ON CONFLICT ON CONSTRAINT csr_pkey DO UPDATE SET score = ?", String.format("%.3f", score));
-			jdbc.update("INSERT INTO creditcard_service_result (creditcard_id, score) VALUES(?,?);",i ,String.format("%.3f", score));
+			jdbc.update("INSERT INTO creditcard_service_result (creditcard_id, score) VALUES(?,?);",i ,String.format("%.1f", score));
 //			jdbc.update("UPDATE creditcard_service_result SET score = ?;", String.format("%.3f", score));
 //			jdbc.update("UPDATE creditcard_service_result SET creditcard_id = (SELECT id FROM creditcard");
 
@@ -134,9 +131,24 @@ public class MainController {
 			}
 			System.out.println(result);
 			attr.addFlashAttribute("result_table", result);
-
+			
+			
+			double std_sum = 0;
+			double vars = 0;
+			for(int j=0; j<result.size(); j++) {
+	            std_sum += (double) result.get(j).get("score");
+	        }
+	        double std_ave = ( (double)std_sum )/result.size();
+	        for (int j=0; j<result.size(); j++) {
+	            vars += (((double) result.get(j).get("score") - std_ave)*((double) result.get(j).get("score") - std_ave));
+	        }
+	       double std = Math.sqrt(vars/result.size());
+	       System.out.println("std:  "+std);
+			
+			
 			// scoreList.add(score);
 		}
+		
 		// Collections.sort(scoreList, Collections.reverseOrder());
 		// attr.addFlashAttribute("scores",scoreList);
 

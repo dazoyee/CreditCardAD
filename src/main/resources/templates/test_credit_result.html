@@ -26,7 +26,9 @@
 			<div class="panel panel-warning">
 				<div class="panel-heading">
 					<div class="panel-title">
-						<h1>あなたにおすすめの<br>クレジットカードはこちら!</h1>
+						<h1>
+							あなたにおすすめの<br>クレジットカードはこちら!
+						</h1>
 					</div>
 				</div>
 			</div>
@@ -35,30 +37,49 @@
 		<div class="row">
 			<div
 				class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-xs-10  col-sm-10 col-md-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1">
+
 				<table class="table table-striped table-hover table-condensed">
 					<tr>
 						<th class="text-center">ランキング</th>
 						<th class="text-center">カード名</th>
-						<th class="text-center">マッチング度</th>
+						<th class="text-center">マッチングスコア</th>
 					</tr>
 					<div th:each="result:${result_table}">
 						<tr>
-							<td class="text-center "th:text="${result.rank}"></td>
+							<td class="text-center " th:text="${result.rank}"></td>
 							<td><a th:href="${result.link}" th:text="${result.name}"></a></td>
 							<td class="text-center" th:text="${result.score}"></td>
 						</tr>
 					</div>
 				</table>
+				<br>
+
+				<ul class="pager">
+					<li><button class="btn btn-danger btn-lg center-block"
+							onclick="location.href='./test_credit_title'">はじめからやり直す！</button></li>
+				</ul>
+				<br>
+
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h5 class="panel-title">
+							<font size="2">マッチングスコアの算出方法について：コサイン類似度</font>
+						</h5>
+					</div>
+					<div class="panel-body" style="text-indent: 2em">
+						<font size="2">
+							<p style="text-indent: 1em">本レコメンドではコサイン類似度を用いている。ベクトル空間モデルにおいて、文書同士を比較する際に用いられる類似度計算手法であり、
+								購買履歴データで購入したか否かのデータとも相性がよいことが知られている。コサイン類似度はそのまま、ベクトル同士の成す角度の近さを表現している。
+								三角関数の普通のコサインの通り、1に近ければ類似しており、0に近ければ非類似していることになる。</p>
+							<p style="text-indent: 1em">ここでは、わかりやすくするために、算出された値に“×100”をして表示している。つまり、全ての項目で合致していると「マッチングスコア：100」ということになる。
+							</p>
+						</font>
+					</div>
+				</div>
+
 			</div>
 		</div>
 	</div>
-	
-	<br>
-	
-	<ul class="pager">
-		<li><button class="btn btn-danger btn-lg center-block"
-				onclick="location.href='./test_credit_title'">はじめからやり直す！</button></li>
-	</ul>
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -67,13 +88,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-

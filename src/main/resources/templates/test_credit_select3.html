@@ -18,6 +18,16 @@
 
 <body>
 
+	<script src="https://ssl24.net/js/formCheck.js" type="text/javascript"></script>
+	<script language="javascript">
+	<!--
+		fld = new Array();
+		fld['service_id'] = "check_many";
+		reqcolor = "#ffe5f2";
+		encolor = "#ffffff";
+		-->
+	</script>
+
 	<div class="container">
 		<div class="page header">
 			<br>
@@ -30,7 +40,8 @@
 			<br> <br>
 		</div>
 
- 		<form method="post" th:action="@{/test_credit_result}"> 
+		<form method="post" th:action="@{/test_credit_result}"
+			onSubmit="return FormCheck(fld,reqcolor,encolor)">
 			<div class="list-group form-group">
 				<div class="page header">
 					<div class="row" style="background: #CBFFD3;">
@@ -41,7 +52,8 @@
 				</div>
 				<br>
 				<div class="list-group-item checkbox">
-					<label><input type="checkbox" name="service_id" value="31">海外旅行傷害保険</label>
+					<label><input type="checkbox" name="service_id" value="31"
+						title="年会費の項目を選択してください。">海外旅行傷害保険</label>
 				</div>
 				<div class="list-group-item checkbox">
 					<label><input type="checkbox" name="service_id" value="32">国内旅行傷害保険</label>
@@ -53,7 +65,8 @@
 					<label><input type="checkbox" name="service_id" value="34">航空便遅延保険</label>
 				</div>
 
-				<br><br>
+				<br>
+				<br>
 
 				<div class="page header">
 					<div class="row" style="background: #CBFFD3;">
@@ -73,7 +86,8 @@
 					<label><input type="checkbox" name="service_id" value="43">リボ払い専用カード</label>
 				</div>
 
-				<br><br>
+				<br>
+				<br>
 
 				<div class="page header">
 					<div class="row" style="background: #CBFFD3;">
@@ -84,16 +98,23 @@
 				</div>
 				<br>
 				<div class="list-group-item checkbox">
-					<label><input type="checkbox" name="service_id" value="51">Tポイント<img src="https://mileage.design-fig.com/wp-content/uploads/2017/04/t-point_logo.jpg" width="200" height="50" class="img-responsive imgcheck"></label>
+					<label><input type="checkbox" name="service_id" value="51">Tポイント<img
+						src="https://mileage.design-fig.com/wp-content/uploads/2017/04/t-point_logo.jpg"
+						width="200" height="50" class="img-responsive imgcheck"></label>
 				</div>
 				<div class="list-group-item checkbox">
-					<label><input type="checkbox" name="service_id" value="52">Pontaポイント<img src="https://point.recruit.co.jp/pontaweb/doc/common/assets/img/logo/ponta01_a.svg" width="200" height="50" class="img-responsive imgcheck"></label>
+					<label><input type="checkbox" name="service_id" value="52">Pontaポイント<img
+						src="https://point.recruit.co.jp/pontaweb/doc/common/assets/img/logo/ponta01_a.svg"
+						width="200" height="50" class="img-responsive imgcheck"></label>
 				</div>
 				<div class="list-group-item checkbox">
-					<label><input type="checkbox" name="service_id" value="53">楽天スーパーポイント<img src="https://point.goo.ne.jp/j/cms_img/0219172250_5a8a895adbdf9.jpg" width="200" height="50" class="img-responsive imgcheck"></label>
+					<label><input type="checkbox" name="service_id" value="53">楽天スーパーポイント<img
+						src="https://point.goo.ne.jp/j/cms_img/0219172250_5a8a895adbdf9.jpg"
+						width="200" height="50" class="img-responsive imgcheck"></label>
 				</div>
 
-				<br><br>
+				<br>
+				<br>
 
 				<div class="page header">
 					<div class="row" style="background: #CBFFD3;">
@@ -104,31 +125,41 @@
 				</div>
 				<br>
 				<div class="list-group-item checkbox">
-					<label><input type="checkbox" name="service_id" value="61">VISA<img src="http://w73t.com/wp-content/uploads/2017/04/visa1.png" width="200" height="50" class="img-responsive imgcheck"></label>
+					<label><input type="checkbox" name="service_id" value="61">VISA<img
+						src="http://w73t.com/wp-content/uploads/2017/04/visa1.png"
+						width="200" height="50" class="img-responsive imgcheck"></label>
 				</div>
 				<div class="list-group-item checkbox">
-					<label><input type="checkbox" name="service_id" value="62">Mastercard<img src="https://card.kinri.jp/wp-content/uploads/mastercard-logo.png" width="200" height="50" class="img-responsive imgcheck"></label>
+					<label><input type="checkbox" name="service_id" value="62">Mastercard<img
+						src="https://card.kinri.jp/wp-content/uploads/mastercard-logo.png"
+						width="200" height="50" class="img-responsive imgcheck"></label>
 				</div>
 				<div class="list-group-item checkbox">
-					<label><input type="checkbox" name="service_id" value="63">JCB<img src="https://大人のクレジットカード.jp/wp/wp-content/uploads/2013/08/jcb.gif" width="200" height="50" class="img-responsive imgcheck"></label>
+					<label><input type="checkbox" name="service_id" value="63">JCB<img
+						src="https://大人のクレジットカード.jp/wp/wp-content/uploads/2013/08/jcb.gif"
+						width="200" height="50" class="img-responsive imgcheck"></label>
 				</div>
 				<div class="list-group-item checkbox">
-					<label><input type="checkbox" name="service_id" value="64">AmericanExpress<img src="https://www.underconsideration.com/brandnew/archives/american_express_logo_wordmark_detail.png" width="200" height="50" class="img-responsive imgcheck"></label>
+					<label><input type="checkbox" name="service_id" value="64">AmericanExpress<img
+						src="https://www.underconsideration.com/brandnew/archives/american_express_logo_wordmark_detail.png"
+						width="200" height="50" class="img-responsive imgcheck"></label>
 				</div>
 				<div class="list-group-item checkbox">
-					<label><input type="checkbox" name="service_id" value="65">DinersClub<img src="https://res.cloudinary.com/loungebuddy/image/upload/w_1400,h_1400,c_limit,q_90/v1457386991/blog/wp-content-uploads-2014-03-Diners-Club-Logo.jpg" width="200" height="50" class="img-responsive imgcheck"></label>
+					<label><input type="checkbox" name="service_id" value="65">DinersClub<img
+						src="https://res.cloudinary.com/loungebuddy/image/upload/w_1400,h_1400,c_limit,q_90/v1457386991/blog/wp-content-uploads-2014-03-Diners-Club-Logo.jpg"
+						width="200" height="50" class="img-responsive imgcheck"></label>
 				</div>
 
 
-				<br><br>
-				<button type="submit" class="btn btn-info btn-lg center-block" name="service_id" value="0">結果へ進む</button>
+				<br>
+				<br>
+				<button type="submit" class="btn btn-info btn-lg center-block">結果へ進む</button>
 			</div>
- 		</form>
+		</form>
 	</div>
 
 	<ul class="pager">
-		<li><button class="btn btn-default"
-				onclick="history.back()">戻る</button></li>
+		<li><button class="btn btn-default" onclick="history.back()">戻る</button></li>
 		<li><button class="btn btn-default"
 				onclick="location.href='./test_credit_title'">ホーム</button></li>
 	</ul>

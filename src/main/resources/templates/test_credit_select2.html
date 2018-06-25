@@ -18,6 +18,16 @@
 
 <body>
 
+	<script src="https://ssl24.net/js/formCheck.js" type="text/javascript"></script>
+	<script language="javascript">
+	<!--
+		fld = new Array();
+		fld['service_id'] = "check_many";
+		reqcolor = "#ffe5f2";
+		encolor = "#ffffff";
+		-->
+	</script>
+
 	<div class="container">
 		<div class="page header">
 			<br>
@@ -27,15 +37,16 @@
 				</div>
 				<br>
 			</div>
-			<br>
-			<br>
+			<br> <br>
 		</div>
-		
-		<form method="post" th:action="@{/test_credit_select3}">
+
+		<form method="post" th:action="@{/test_credit_select3 }"
+			onSubmit="return FormCheck(fld,reqcolor,encolor)">
 			<div class="list-group form-group">
 				<p>
 				<div class="list-group-item checkbox">
-					<label><input type="checkbox" name="service_id" value="21">年会費無料</label>
+					<label><input type="checkbox" name="service_id" value="21"
+						title="年会費の項目を選択してください。">年会費無料</label>
 				</div>
 				<div class="list-group-item checkbox">
 					<label><input type="checkbox" name="service_id" value="22">1円以上5,000円未満</label>
@@ -58,18 +69,15 @@
 					<label><input type="checkbox" name="service_id" value="27">条件付無料</label>
 				</div>
 				</p>
-				
-				<font color="#808080">※いずれかの項目を選択してください。</font>
-				<br>
-				<br>
-				<button type="submit" class="btn btn-info" name="service_id" value="0">次へ進む</button>
+
+				<font color="#808080">※いずれかの項目を選択してください。</font> <br> <br>
+				<button type="submit" class="btn btn-info">次へ進む</button>
 			</div>
 		</form>
 	</div>
 
 	<ul class="pager">
-		<li><button class="btn btn-default"
-				onclick="history.back()">戻る</button></li>
+		<li><button class="btn btn-default" onclick="history.back()">戻る</button></li>
 		<li><button class="btn btn-default"
 				onclick="location.href='./test_credit_title'">ホーム</button></li>
 	</ul>
