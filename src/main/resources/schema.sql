@@ -35,6 +35,12 @@ CREATE TABLE creditcard_service_result (
   FOREIGN KEY (creditcard_id) REFERENCES creditcard(id)  
 );
 
+CREATE TABLE creditcard_service_result_zscore (
+  creditcard_id INT,
+  zscore FLOAT,
+  PRIMARY KEY (creditcard_id, zscore),
+  FOREIGN KEY (creditcard_id) REFERENCES creditcard(id)  
+);
 
 
 INSERT INTO creditcard (id, name) VALUES 

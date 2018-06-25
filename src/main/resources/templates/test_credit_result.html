@@ -43,12 +43,14 @@
 						<th class="text-center">ランキング</th>
 						<th class="text-center">カード名</th>
 						<th class="text-center">マッチングスコア</th>
+						<th class="text-center">(Zスコア)</th>
 					</tr>
 					<div th:each="result:${result_table}">
 						<tr>
 							<td class="text-center " th:text="${result.rank}"></td>
 							<td><a th:href="${result.link}" th:text="${result.name}"></a></td>
 							<td class="text-center" th:text="${result.score}"></td>
+							<td class="text-center">(<span th:text="${result.zscore}"></span>)</td>
 						</tr>
 					</div>
 				</table>
