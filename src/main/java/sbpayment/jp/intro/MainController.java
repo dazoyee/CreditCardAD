@@ -54,6 +54,7 @@ public class MainController {
 
 	@GetMapping("/test_credit_result_syosai/{name}")
 	public String test_credit_result_syosai(@PathVariable("name") String name, Model model) {
+		//サービス名の取得
 		List<Map<String, Object>> content = jdbc.queryForList(
 				"SELECT content FROM service WHERE id IN (SELECT service_id FROM creditcard_service WHERE creditcard_id = (SELECT id FROM creditcard WHERE name = ?));",
 				name);
@@ -68,6 +69,7 @@ public class MainController {
 	@PostMapping("/test_credit_select2")
 	public String test_credit_select2(int service_id[], RedirectAttributes attr) {
 		jdbc.update("DELETE FROM creditcard_service_user WHERE creditcard_id = 99");
+		//複数選択
 		for (int i = 0; i < service_id.length; i++) {
 			jdbc.update("INSERT INTO creditcard_service_user (creditcard_id,service_id) values(99,?);", service_id[i]);
 		}
@@ -76,6 +78,7 @@ public class MainController {
 
 	@PostMapping("/test_credit_select3")
 	public String test_credit_select3(int service_id[], RedirectAttributes attr) {
+		//複数選択
 		for (int i = 0; i < service_id.length; i++) {
 			jdbc.update("INSERT INTO creditcard_service_user (creditcard_id,service_id) values(99,?);", service_id[i]);
 		}
@@ -84,10 +87,12 @@ public class MainController {
 
 	@PostMapping("/test_credit_result")
 	public String test_credit_result(int service_id[], RedirectAttributes attr) {
+		//複数選択
 		for (int i = 0; i < service_id.length; i++) {
 			jdbc.update("INSERT INTO creditcard_service_user (creditcard_id,service_id) VALUES(99,?);", service_id[i]);
 		}
 		
+		//ユーザー情報の計算
 		Map<String, Object> sum_user = jdbc.queryForList(
 				"SELECT COUNT(service_id) AS sum_user FROM creditcard_service_user WHERE service_id != 0 GROUP BY creditcard_id")
 				.get(0);
@@ -102,6 +107,7 @@ public class MainController {
 
 		// List<Double> scoreList = new ArrayList<>();
 		for (int i = 1; i < creditcard_id_max + 1; i++) {
+			//マッチ数の算出と計算
 			Map<String, Object> csu_count = jdbc.queryForList(
 					"SELECT COUNT(creditcard_service.creditcard_id) AS csu_count FROM creditcard_service INNER JOIN creditcard_service_user ON creditcard_service.service_id = creditcard_service_user.service_id WHERE creditcard_service.creditcard_id = ?",
 					i).get(0);
@@ -119,13 +125,14 @@ public class MainController {
 			// System.out.println();
 			System.out.println("-------------------------------------------------------------");
 
-			std_sum += score;
+			std_sum += score;	//標準偏差算出のため
 
 			jdbc.update("INSERT INTO creditcard_service_result (creditcard_id, score) VALUES(?,?);", i, String.format("%.1f", score));
 
 			// scoreList.add(score);
 		}
 
+		//ｚスコアの計算
 		double std_ave = ((double) std_sum) / creditcard_id_max;
 
 		List<Map<String, Object>> result_table_score = jdbc.queryForList("SELECT score FROM creditcard_service_result");
@@ -135,16 +142,15 @@ public class MainController {
 					* ((double) result_table_score.get(i).get("score") - std_ave));
 		}
 		double std = Math.sqrt(vars / creditcard_id_max);
-		System.out.println("std:  " + std);
 		for (int i = 0; i < result_table_score.size(); i++) {
 			double zscore = Double.valueOf(((double) result_table_score.get(i).get("score") - std_ave) / std);
-			System.out.println("zscore:  " + zscore);
 
 			jdbc.update("INSERT INTO creditcard_service_result_zscore (creditcard_id, zscore) VALUES(?,?);", i + 1,
 					String.format("%.3f", zscore));
 
 		}
 
+		//トップテンの呼出し
 		List<Map<String, Object>> result = jdbc
 				.queryForList("SELECT ROW_NUMBER() OVER() AS RANK, * FROM  (SELECT name, score, zscore FROM \r\n"
 						+ "(SELECT creditcard_service_result.creditcard_id, score, zscore FROM creditcard_service_result_zscore JOIN creditcard_service_result ON creditcard_service_result_zscore.creditcard_id = creditcard_service_result.creditcard_id) AS csrz  \r\n"
