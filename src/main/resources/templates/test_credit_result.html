@@ -47,10 +47,10 @@
 					</tr>
 					<div th:each="result:${result_table}">
 						<tr>
-							<td class="text-center " th:text="${result.rank}"></td>
-							<td><a th:href="${result.link}" th:text="${result.name}"></a></td>
-							<td class="text-center" th:text="${result.score}"></td>
-							<td class="text-center"><font color="#808080">(<span th:text="${result.zscore}"></span>)</font></td>
+							<td class="text-center "><h5 th:text="${result.rank}"></h5></td>
+							<td><h5><a th:href="${result.link}" th:text="${result.name}"></a></h5></td>
+							<td class="text-center"><h4 th:text="${result.score}"></h4></td>
+							<td class="text-center"><h5><font color="#808080">(<span th:text="${result.zscore}"></span>)</font></h5></td>
 						</tr>
 					</div>
 				</table>
