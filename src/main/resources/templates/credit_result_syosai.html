@@ -35,12 +35,12 @@
 				background-size:cover;">
 			<dl>
 				<dt>
-					<h3 class="page-header" style="background: #FFF">～<span th:text="${creditcard_name}"></span>～</h3>
+					<h3 class="page-header" style="background: #FFF">～<span th:text="${credit_card_name}"></span>～</h3>
 				</dt>
 				<br>
 				<dd>
 					<div class="list-group-item"
-						th:each="content:${creditcard_service}">
+						th:each="content:${credit_card_service}">
 						<ul>
 							<li><h5 th:text="${content.content}"></h5></li>
 						</ul>

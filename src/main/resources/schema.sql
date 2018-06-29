@@ -1,4 +1,4 @@
-CREATE TABLE creditcard (
+CREATE TABLE credit_card (
   id INT AUTO_INCREMENT,
   name VARCHAR(100),
   PRIMARY KEY (id)
@@ -10,40 +10,36 @@ CREATE TABLE service (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE creditcard_service (
-  creditcard_id INT,
+CREATE TABLE credit_card_service (
+  credit_card_id INT,
   service_id INT,
-  PRIMARY KEY (creditcard_id, service_id),
-  FOREIGN KEY (creditcard_id) REFERENCES creditcard(id),
+  PRIMARY KEY (credit_card_id, service_id),
+  FOREIGN KEY (credit_card_id) REFERENCES credit_card(id),
   FOREIGN KEY (service_id) REFERENCES service(id)
 );
 
-CREATE TABLE creditcard_service_user (
-  creditcard_id INT,
+CREATE TABLE credit_card_service_user (
+  credit_card_id INT,
   service_id INT,
-  PRIMARY KEY (creditcard_id, service_id)
-/*
-  FOREIGN KEY (creditcard_id) REFERENCES creditcard_service(creditcard_id),
-  FOREIGN KEY (service_id) REFERENCES creditcard_service(service_id)
-*/
+  PRIMARY KEY (credit_card_id, service_id)
 );
 
-CREATE TABLE creditcard_service_result (
-  creditcard_id INT,
+CREATE TABLE credit_card_service_result (
+  credit_card_id INT,
   score FLOAT,
-  PRIMARY KEY (creditcard_id, score),
-  FOREIGN KEY (creditcard_id) REFERENCES creditcard(id)  
+  PRIMARY KEY (credit_card_id, score),
+  FOREIGN KEY (credit_card_id) REFERENCES credit_card(id)  
 );
 
-CREATE TABLE creditcard_service_result_zscore (
-  creditcard_id INT,
+CREATE TABLE credit_card_service_result_zscore (
+  credit_card_id INT,
   zscore FLOAT,
-  PRIMARY KEY (creditcard_id, zscore),
-  FOREIGN KEY (creditcard_id) REFERENCES creditcard(id)  
+  PRIMARY KEY (credit_card_id, zscore),
+  FOREIGN KEY (credit_card_id) REFERENCES credit_card(id)  
 );
 
 
-INSERT INTO creditcard (id, name) VALUES 
+INSERT INTO credit_card (id, name) VALUES 
 	(01, 'Orico Card THE POINT'), (02, '楽天カード'), (03, '三井住友VISAゴールドカード'), (04, 'エポスカード'), (05, 'Yahoo! JAPANカード'),
 	(06, '三井住友VISAクラシックカード'), (07, 'Orico Card THE POINT PREMIUM GOLD'), (08, 'dカード GOLD'), (09, 'イオンカードセレクト'), 
 	(10, 'JCB CARD W'), (11, 'REX CARD（レックスカード）'), (12, 'ビックカメラSuicaカード'), (13, '楽天ゴールドカード'), (14, 'リクルートカード'), 
@@ -81,60 +77,60 @@ INSERT INTO service (id, content) VALUES
 	
 
 --select1の格納（付帯サービス）
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (01, 01), (01, 02), (01, 03), (01, 04), (01, 05);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (02, 01), (02, 02), (02, 05), (02, 06);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (03, 01), (03, 14);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (04, 01), (04, 06), (04, 10), (04, 17);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (05, 01), (05, 02), (05, 04);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (06, 01);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (07, 01), (07, 02), (07, 03), (07, 04), (07, 05);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (08, 01), (08, 02), (08, 08), (08, 11), (08, 14);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (09, 01), (09, 10);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (10, 01), (10, 02), (10, 03), (10, 06), (10, 07);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (11, 01), (11, 02);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (12, 01), (12, 06), (12, 12);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (13, 01), (13, 02), (13, 05), (13, 06), (13, 14);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (14, 01), (14, 02);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (15, 01), (15, 10);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (16, 01), (16, 10);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (17, 01), (17, 02), (17, 08), (17, 11);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (18, 01), (18, 14), (18, 15);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (19, 01), (19, 11);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (20, 01), (20, 12);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (21, 01), (21, 06), (21, 14), (21, 16);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (22, 01), (22, 06), (22, 10), (21, 17);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (23, 01);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (24, 01), (24, 14);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (25, 01), (25, 02), (25, 05), (25, 06), (25, 14);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (26, 01), (26, 06), (26, 07), (26, 14);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (27, 01), (27, 02);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (28, 13);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (29, 01), (29, 07);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (30, 01), (30, 14), (30, 15);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (31, 14), (31, 15), (31, 16);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (32, 03), (32, 07);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (33, 01), (33, 14);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (34, 01), (34, 06), (34, 16);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (35, 01), (35, 10), (35, 13);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (36, 01), (36, 14);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (37, 01), (37, 06), (37, 07);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (38, 01), (38, 09);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (39, 17);
---INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (40, 00);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (41, 01), (41, 14);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (42, 01), (42, 06), (42, 17);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (43, 01), (43, 02), (43, 03), (43, 06), (43, 07);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (44, 02), (44, 03), (44, 04), (44, 05), (44, 13), (44, 14);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (45, 01);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (46, 01), (46, 06), (46, 14), (46, 15);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (47, 01), (47, 06), (47, 07);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (48, 01), (48, 06), (48, 12), (48, 16);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (49, 01), (49, 02), (49, 13);
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES (50, 06), (50, 10), (50, 14);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (01, 01), (01, 02), (01, 03), (01, 04), (01, 05);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (02, 01), (02, 02), (02, 05), (02, 06);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (03, 01), (03, 14);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (04, 01), (04, 06), (04, 10), (04, 17);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (05, 01), (05, 02), (05, 04);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (06, 01);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (07, 01), (07, 02), (07, 03), (07, 04), (07, 05);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (08, 01), (08, 02), (08, 08), (08, 11), (08, 14);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (09, 01), (09, 10);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (10, 01), (10, 02), (10, 03), (10, 06), (10, 07);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (11, 01), (11, 02);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (12, 01), (12, 06), (12, 12);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (13, 01), (13, 02), (13, 05), (13, 06), (13, 14);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (14, 01), (14, 02);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (15, 01), (15, 10);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (16, 01), (16, 10);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (17, 01), (17, 02), (17, 08), (17, 11);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (18, 01), (18, 14), (18, 15);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (19, 01), (19, 11);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (20, 01), (20, 12);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (21, 01), (21, 06), (21, 14), (21, 16);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (22, 01), (22, 06), (22, 10), (21, 17);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (23, 01);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (24, 01), (24, 14);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (25, 01), (25, 02), (25, 05), (25, 06), (25, 14);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (26, 01), (26, 06), (26, 07), (26, 14);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (27, 01), (27, 02);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (28, 13);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (29, 01), (29, 07);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (30, 01), (30, 14), (30, 15);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (31, 14), (31, 15), (31, 16);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (32, 03), (32, 07);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (33, 01), (33, 14);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (34, 01), (34, 06), (34, 16);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (35, 01), (35, 10), (35, 13);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (36, 01), (36, 14);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (37, 01), (37, 06), (37, 07);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (38, 01), (38, 09);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (39, 17);
+--INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (40, 00);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (41, 01), (41, 14);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (42, 01), (42, 06), (42, 17);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (43, 01), (43, 02), (43, 03), (43, 06), (43, 07);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (44, 02), (44, 03), (44, 04), (44, 05), (44, 13), (44, 14);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (45, 01);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (46, 01), (46, 06), (46, 14), (46, 15);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (47, 01), (47, 06), (47, 07);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (48, 01), (48, 06), (48, 12), (48, 16);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (49, 01), (49, 02), (49, 13);
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES (50, 06), (50, 10), (50, 14);
 
 
 --select2の格納（年会費）
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES 
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES 
 	(01, 21), (02, 21), (03, 23), (04, 21), (05, 21), (06, 22), (06, 27), (07, 22), (08, 23), (09, 21), (10, 21), 
 	(11, 21), (12, 22), (12, 26), (12, 27), (13, 22), (14, 21), (15, 21), (16, 21), (17, 22), (17, 26), (17, 27), (18, 25), (18, 26), (19, 21), (20, 22), 
 	(21, 24), (22, 21), (23, 21), (24, 25), (25, 23), (26, 23), (26, 26), (27, 22), (27, 26), (27, 27), (28, 21), (29, 22), (29, 26), (29, 27), (30, 23), (30, 26), 
@@ -142,7 +138,7 @@ INSERT INTO creditcard_service (creditcard_id, service_id) VALUES
 	(41, 23), (41, 26), (42, 22), (42, 26), (43, 21), (44, 24), (45, 21),(45, 27),(46, 23),(47, 21),(48, 22), (48, 26), (49, 22), (49, 26), (49, 27), (50, 25); 
 
 --select3の格納（保険、種類、ポイント、国際ブランド）
-INSERT INTO creditcard_service (creditcard_id, service_id) VALUES 
+INSERT INTO credit_card_service (credit_card_id, service_id) VALUES 
 	(01, 62), (01, 63), (02, 31), (02, 53), (02, 61), (02, 62), (02, 63), (03, 31), (03, 32), (03, 33), (03, 42), (03, 61), (03, 62), (04, 31), (04, 61), 
 	(05, 33), (05, 51), (05, 61), (05, 62), (05, 63), (06, 31), (06, 33), (06, 61), (06, 62), (07, 31), (07, 32), (07, 33), (07, 42), (07, 62), (07, 63),  
 	(08, 31), (08, 32), (08, 33), (08, 34), (08, 42), (08, 61), (08, 62), (09, 33), (09, 61), (09, 62), (09, 63), (10, 31), (10, 33), (10, 63), 
