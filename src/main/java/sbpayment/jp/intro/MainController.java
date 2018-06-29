@@ -20,35 +20,27 @@ public class MainController {
 
 	@GetMapping("/test_credit_title")
 	public String test_credit_title() {
-		jdbc.update("DELETE FROM creditcard_service_user WHERE creditcard_id = 99");
-		jdbc.update("DELETE FROM creditcard_service_result");
-		jdbc.update("DELETE FROM creditcard_service_result_zscore");
 		return "test_credit_title";
 	}
 
 	@GetMapping("/test_credit_select1")
 	public String test_credit_select1(Model model) {
-		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id BETWEEN 1 AND 17");
 		return "test_credit_select1";
 	}
 
 	@GetMapping("/test_credit_select2")
 	public String test_credit_select2(Model model) {
-		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id BETWEEN 21 AND 27");
 		return "test_credit_select2";
 	}
 
 	@GetMapping("/test_credit_select3")
 	public String test_credit_select3(Model model) {
-		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id BETWEEN 31 AND 34");
-		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id BETWEEN 41 AND 43");
-		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id BETWEEN 51 AND 53");
-		jdbc.update("DELETE FROM creditcard_service_user WHERE service_id BETWEEN 61 AND 65");
 		return "test_credit_select3";
 	}
 
 	@GetMapping("/test_credit_result")
 	public String test_credit_result() {
+		
 		return "test_credit_result";
 	}
 
@@ -68,7 +60,7 @@ public class MainController {
 
 	@PostMapping("/test_credit_select2")
 	public String test_credit_select2(int service_id[], RedirectAttributes attr) {
-		jdbc.update("DELETE FROM creditcard_service_user WHERE creditcard_id = 99");
+		jdbc.update("DELETE FROM creditcard_service_user WHERE creditcard_id = 99 AND service_id BETWEEN 1 AND 17");
 		//複数選択
 		for (int i = 0; i < service_id.length; i++) {
 			jdbc.update("INSERT INTO creditcard_service_user (creditcard_id,service_id) values(99,?);", service_id[i]);
@@ -78,6 +70,7 @@ public class MainController {
 
 	@PostMapping("/test_credit_select3")
 	public String test_credit_select3(int service_id[], RedirectAttributes attr) {
+		jdbc.update("DELETE FROM creditcard_service_user WHERE creditcard_id = 99 AND service_id BETWEEN 21 AND 27");
 		//複数選択
 		for (int i = 0; i < service_id.length; i++) {
 			jdbc.update("INSERT INTO creditcard_service_user (creditcard_id,service_id) values(99,?);", service_id[i]);
@@ -87,6 +80,12 @@ public class MainController {
 
 	@PostMapping("/test_credit_result")
 	public String test_credit_result(int service_id[], RedirectAttributes attr) {
+		jdbc.update("DELETE FROM creditcard_service_user WHERE creditcard_id = 99 AND service_id BETWEEN 31 AND 34");
+		jdbc.update("DELETE FROM creditcard_service_user WHERE creditcard_id = 99 AND service_id BETWEEN 41 AND 43");
+		jdbc.update("DELETE FROM creditcard_service_user WHERE creditcard_id = 99 AND service_id BETWEEN 51 AND 53");
+		jdbc.update("DELETE FROM creditcard_service_user WHERE creditcard_id = 99 AND service_id BETWEEN 61 AND 65");
+		jdbc.update("DELETE FROM creditcard_service_result");
+		jdbc.update("DELETE FROM creditcard_service_result_zscore");
 		//複数選択
 		for (int i = 0; i < service_id.length; i++) {
 			jdbc.update("INSERT INTO creditcard_service_user (creditcard_id,service_id) VALUES(99,?);", service_id[i]);
